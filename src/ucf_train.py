@@ -128,7 +128,7 @@ def setup_seed(seed):
 
 if __name__ == '__main__':
     device = "cuda" if torch.cuda.is_available() else "cpu"
-    args = ucf_option.parser.parse_args()
+    args, unknown_args = ucf_option.parser.parse_known_args()
     setup_seed(args.seed)
 
     label_map = dict({'Normal': 'normal', 'Abuse': 'abuse', 'Arrest': 'arrest', 'Arson': 'arson', 'Assault': 'assault', 'Burglary': 'burglary', 'Explosion': 'explosion', 'Fighting': 'fighting', 'RoadAccidents': 'roadAccidents', 'Robbery': 'robbery', 'Shooting': 'shooting', 'Shoplifting': 'shoplifting', 'Stealing': 'stealing', 'Vandalism': 'vandalism'})

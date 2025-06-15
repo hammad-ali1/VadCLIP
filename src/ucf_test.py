@@ -4,7 +4,6 @@ import torch.nn.functional as F
 from torch.utils.data import DataLoader
 import numpy as np
 from sklearn.metrics import average_precision_score, roc_auc_score
-from tqdm import tqdm
 
 from model import CLIPVAD
 from utils.dataset import UCFDataset
@@ -20,7 +19,7 @@ def test(model, testdataloader, maxlen, prompt_text, gt, gtsegments, gtlabels, d
     element_logits2_stack = []
 
     with torch.no_grad():
-        for i, item in tqdm(enumerate(testdataloader)):
+        for i, item in enumerate(testdataloader):
             visual = item[0].squeeze(0)
             length = item[2]
 

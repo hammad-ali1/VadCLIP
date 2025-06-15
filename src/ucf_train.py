@@ -5,7 +5,6 @@ from torch.utils.data import DataLoader
 from torch.optim.lr_scheduler import MultiStepLR
 import numpy as np
 import random
-from tqdm import tqdm
 
 from model import CLIPVAD
 from ucf_test import test
@@ -60,7 +59,7 @@ def train(model, normal_loader, anomaly_loader, testloader, args, label_map, dev
         print("checkpoint info:")
         print("epoch:", epoch+1, " ap:", ap_best)
 
-    for e in tqdm(range(args.max_epoch)):
+    for e in range(args.max_epoch):
         model.train()
         loss_total1 = 0
         loss_total2 = 0

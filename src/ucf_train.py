@@ -52,7 +52,7 @@ def train(model, normal_loader, anomaly_loader, testloader, args, label_map, dev
     epoch = 0
 
     if args.use_checkpoint == True:
-        checkpoint = torch.load(args.checkpoint_path)
+        checkpoint = torch.load(args.checkpoint_path, weights_only=False)
         model.load_state_dict(checkpoint['model_state_dict'])
         optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
         epoch = checkpoint['epoch']
@@ -116,10 +116,10 @@ def train(model, normal_loader, anomaly_loader, testloader, args, label_map, dev
         checkpoint_dir = os.path.dirname(args.checkpoint_path)
         save_path = os.path.join(checkpoint_dir, 'model_cur.pth')
         torch.save(model.state_dict(), save_path)
-        checkpoint = torch.load(args.checkpoint_path)
+        checkpoint = torch.load(args.checkpoint_path, weights_only=False)
         model.load_state_dict(checkpoint['model_state_dict'])
 
-    checkpoint = torch.load(args.checkpoint_path)
+    checkpoint = torch.load(args.checkpoint_path, weights_only=False)
     torch.save(checkpoint['model_state_dict'], args.model_path)
 
 def setup_seed(seed):

@@ -5,6 +5,7 @@ from torch.utils.data import DataLoader
 from torch.optim.lr_scheduler import MultiStepLR
 import numpy as np
 import random
+import os
 
 from model import CLIPVAD
 from ucf_test import test
@@ -112,7 +113,9 @@ def train(model, normal_loader, anomaly_loader, testloader, args, label_map, dev
                 
         scheduler.step()
         
-        torch.save(model.state_dict(), 'model/model_cur.pth')
+        checkpoint_dir = os.path.dirname(args.checkpoint_path)
+        save_path = os.path.join(checkpoint_dir, 'model_cur.pth')
+        torch.save(model.state_dict(), save_path)
         checkpoint = torch.load(args.checkpoint_path)
         model.load_state_dict(checkpoint['model_state_dict'])
 
